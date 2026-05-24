@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Repair Boss — Roofing & Exterior Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0d0d0d;
+    --dark: #1a1410;
+    --rust: #b84c1e;
+    --amber: #d97c2b;
+    --cream: #f2ead8;
+    --warm-white: #faf7f0;
+    --slate: #4a4540;
+    --light-slate: #8a8078;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--warm-white);
+    color: var(--dark);
+    font-family: 'Lora', serif;
+    overflow-x: hidden;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(13,13,13,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(185,76,30,0.25);
+  }
+
+  .nav-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: 0.04em;
+    color: var(--cream);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .nav-logo span { color: var(--rust); }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--light-slate);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--amber); }
+
+  .nav-cta {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cream) !important;
+    border: 1.5px solid var(--rust);
+    padding: 8px 20px;
+    transition: background 0.2s, color 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--rust) !important; color: white !important; }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    background: var(--dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 140px 64px 80px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    right: -40px; top: 0; bottom: 0;
+    width: 80px;
+    background: var(--dark);
+    clip-path: polygon(0 0, 50% 0, 100% 50%, 50% 100%, 0 100%);
+    z-index: 3;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(3.5rem, 6vw, 6rem);
+    line-height: 0.92;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: var(--cream);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.4s forwards;
+  }
+
+  .hero-title em {
+    font-style: normal;
+    color: var(--amber);
+    display: block;
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--light-slate);
+    max-width: 380px;
+    margin-bottom: 44px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.6s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.8s forwards;
+  }
+
+  .btn-primary {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--rust);
+    color: white;
+    padding: 16px 36px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: #9a3d14; transform: translateY(-2px); }
+
+  .btn-outline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--cream);
+    padding: 16px 36px;
+    text-decoration: none;
+    border: 1.5px solid rgba(242,234,216,0.3);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover { border-color: var(--amber); color: var(--amber); }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.65) saturate(0.8);
+    transform: scale(1.05);
+    animation: slowZoom 12s ease forwards;
+  }
+
+  .hero-right::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 60%, rgba(185,76,30,0.2));
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    position: absolute;
+    bottom: 48px;
+    right: 48px;
+    background: var(--rust);
+    color: white;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 16px 20px;
+    text-align: center;
+    line-height: 1.4;
+    animation: fadeIn 1s ease 1.2s both;
+  }
+
+  .hero-badge strong {
+    display: block;
+    font-size: 2.4rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  /* ===== TRUST BAR ===== */
+  .trust-bar {
+    background: var(--rust);
+    padding: 18px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .trust-item {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .trust-item::before {
+    content: '✓';
+    font-size: 1rem;
+    opacity: 0.8;
+  }
+
+  .trust-divider {
+    width: 1px;
+    height: 20px;
+    background: rgba(255,255,255,0.3);
+  }
+
+  /* ===== SECTION SHARED ===== */
+  section { padding: 100px 48px; }
+
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.4rem, 4vw, 4rem);
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: var(--dark);
+  }
+
+  /* ===== SERVICES ===== */
+  .services {
+    background: var(--cream);
+  }
+
+  .services-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: end;
+    margin-bottom: 64px;
+  }
+
+  .services-desc {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--slate);
+    padding-top: 8px;
+    align-self: end;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .service-card {
+    background: var(--dark);
+    padding: 48px 36px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+    cursor: default;
+  }
+
+  .service-card:hover { transform: translateY(-6px); }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--rust);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 4rem;
+    line-height: 1;
+    color: rgba(185,76,30,0.15);
+    position: absolute;
+    top: 20px; right: 24px;
+    letter-spacing: -0.03em;
+    transition: color 0.3s;
+  }
+
+  .service-card:hover .service-num { color: rgba(185,76,30,0.35); }
+
+  .service-icon {
+    font-size: 2rem;
+    margin-bottom: 24px;
+  }
+
+  .service-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-bottom: 14px;
+  }
+
+  .service-desc {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--light-slate);
+  }
+
+  /* ===== ABOUT / MITCH ===== */
+  .about {
+    background: var(--warm-white);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding: 0;
+  }
+
+  .about-image {
+    position: relative;
+    min-height: 600px;
+    overflow: hidden;
+  }
+
+  .about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7) saturate(0.75);
+  }
+
+  .about-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, transparent 50%, var(--warm-white));
+  }
+
+  .about-content {
+    padding: 100px 64px 100px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .about-quote {
+    font-size: 1.25rem;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--slate);
+    border-left: 3px solid var(--rust);
+    padding-left: 24px;
+    margin: 32px 0;
+  }
+
+  .about-text {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--slate);
+    margin-bottom: 16px;
+  }
+
+  .about-sig {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 0.05em;
+    color: var(--dark);
+    margin-top: 24px;
+  }
+
+  .about-sig span {
+    display: block;
+    font-family: 'Lora', serif;
+    font-weight: 400;
+    font-size: 0.9rem;
+    color: var(--light-slate);
+    letter-spacing: 0.02em;
+    margin-top: 4px;
+  }
+
+  /* ===== STATS ===== */
+  .stats {
+    background: var(--dark);
+    padding: 80px 48px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+
+  .stat-item {
+    padding: 48px 36px;
+    background: rgba(255,255,255,0.03);
+    text-align: center;
+    border-top: 3px solid transparent;
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .stat-item:hover {
+    border-color: var(--rust);
+    background: rgba(185,76,30,0.06);
+  }
+
+  .stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 3.5rem;
+    line-height: 1;
+    color: var(--amber);
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--light-slate);
+    margin-top: 10px;
+  }
+
+  /* ===== REVIEWS ===== */
+  .reviews {
+    background: var(--cream);
+  }
+
+  .reviews-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .stars {
+    color: var(--amber);
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .review-card {
+    background: var(--warm-white);
+    padding: 40px 36px;
+    border-bottom: 3px solid transparent;
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+  }
+
+  .review-card:hover {
+    border-bottom-color: var(--rust);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    transform: translateY(-4px);
+  }
+
+  .review-stars { color: var(--amber); font-size: 1rem; letter-spacing: 2px; margin-bottom: 18px; }
+
+  .review-text {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--slate);
+    font-style: italic;
+    margin-bottom: 24px;
+  }
+
+  .review-author {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--dark);
+  }
+
+  .review-date {
+    font-size: 0.8rem;
+    color: var(--light-slate);
+    margin-top: 4px;
+  }
+
+  /* ===== GALLERY ===== */
+  .gallery {
+    padding: 80px 0;
+    background: var(--dark);
+    overflow: hidden;
+  }
+
+  .gallery-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--rust);
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .gallery-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.4rem, 4vw, 3.5rem);
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .gallery-strip {
+    display: flex;
+    gap: 4px;
+    padding: 0 48px;
+  }
+
+  .gallery-item {
+    flex: 1;
+    min-height: 380px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: flex 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .gallery-item:hover { flex: 2.5; }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.65) saturate(0.7);
+    transition: filter 0.4s, transform 0.5s;
+  }
+
+  .gallery-item:hover img {
+    filter: brightness(0.85) saturate(1);
+    transform: scale(1.04);
+  }
+
+  .gallery-item-label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(13,13,13,0.9), transparent);
+    padding: 40px 20px 20px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--cream);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.35s, transform 0.35s;
+  }
+
+  .gallery-item:hover .gallery-item-label { opacity: 1; transform: translateY(0); }
+
+  /* ===== CTA ===== */
+  .cta {
+    background: var(--rust);
+    padding: 100px 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta::before {
+    content: 'REPAIR BOSS';
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 18vw;
+    color: rgba(255,255,255,0.05);
+    position: absolute;
+    white-space: nowrap;
+    letter-spacing: -0.03em;
+    pointer-events: none;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .cta-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    text-transform: uppercase;
+    color: white;
+    line-height: 1;
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .cta-sub {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 44px;
+    max-width: 500px;
+    line-height: 1.7;
+    position: relative;
+  }
+
+  .cta-phone {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 2.8rem;
+    letter-spacing: -0.01em;
+    color: white;
+    text-decoration: none;
+    position: relative;
+    transition: opacity 0.2s;
+  }
+
+  .cta-phone:hover { opacity: 0.85; }
+
+  .cta-note {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-top: 14px;
+    position: relative;
+  }
+
+  .btn-white {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: white;
+    color: var(--rust);
+    padding: 18px 44px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+    position: relative;
+    margin-top: 32px;
+  }
+
+  .btn-white:hover { background: var(--cream); transform: translateY(-2px); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--black);
+    padding: 60px 48px 32px;
+    color: var(--light-slate);
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .footer-brand {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.8rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-bottom: 16px;
+  }
+
+  .footer-brand span { color: var(--rust); }
+
+  .footer-tagline {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--light-slate);
+    max-width: 280px;
+  }
+
+  .footer-col-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-bottom: 20px;
+  }
+
+  .footer-links { list-style: none; }
+
+  .footer-links li { margin-bottom: 10px; }
+
+  .footer-links a {
+    font-size: 0.9rem;
+    color: var(--light-slate);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--amber); }
+
+  .footer-bottom {
+    padding-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    color: rgba(138,128,120,0.6);
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slowZoom {
+    from { transform: scale(1.05); }
+    to { transform: scale(1); }
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 120px 32px 60px; }
+    .hero-left::after { display: none; }
+    .hero-right { min-height: 340px; }
+    .services-header { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .about { grid-template-columns: 1fr; }
+    .about-image { min-height: 300px; }
+    .about-content { padding: 60px 32px; }
+    .stats { grid-template-columns: 1fr 1fr; padding: 60px 24px; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .gallery-strip { flex-direction: column; padding: 0 24px; }
+    .gallery-item { min-height: 220px; }
+    section { padding: 72px 24px; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">The <span>Repair</span> Boss</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact" class="nav-cta">Free Quote</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Ottawa & Stittsville's Trusted Roofer</p>
+    <h1 class="hero-title">
+      Built Tough.<br>
+      <em>Done Right.</em>
+      Guaranteed.
+    </h1>
+    <p class="hero-desc">From storm repairs to full roof replacements, The Repair Boss delivers expert craftsmanship with same-day response and transparent pricing.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Get a Free Quote</a>
+      <a href="#reviews" class="btn-outline">See Reviews</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIiB2aWV3Qm94PSIwIDAgODAwIDYwMCI+CiAgPHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9IiMyYTI1MjAiLz4KICA8cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNzk2IiBoZWlnaHQ9IjU5NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjg0YzFlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjEyLDYiLz4KICA8dGV4dCB4PSI0MDAiIHk9IjI4MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI4IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI2I4NGMxZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+8J+TtzwvdGV4dD4KICA8dGV4dCB4PSI0MDAiIHk9IjMzMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjIyIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI2YyZWFkOCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Uk9PRiBQUk9KRUNUPC90ZXh0PgogIDx0ZXh0IHg9IjQwMCIgeT0iMzY1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM4YTgwNzgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlJlcGxhY2Ugd2l0aCB5b3VyIGhpZ2gtcmVzIHBob3RvPC90ZXh0Pgo8L3N2Zz4=" alt="Professional roofing work">
+    <div class="hero-badge">
+      <strong>5★</strong>
+      Rated<br>Local Roofer
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">Same-Day Emergency Response</div>
+  <div class="trust-divider"></div>
+  <div class="trust-item">Free Detailed Estimates</div>
+  <div class="trust-divider"></div>
+  <div class="trust-item">Fully Insured & Licensed</div>
+  <div class="trust-divider"></div>
+  <div class="trust-item">Workmanship Warranty</div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header">
+    <div>
+      <p class="section-label">What We Do</p>
+      <h2 class="section-title">Exterior Services<br>You Can Count On</h2>
+    </div>
+    <p class="services-desc">Whether it's an urgent repair after a storm or a full roof replacement, Mitch and the team arrive on time, work with precision, and leave your property better than they found it.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-num">01</span>
+      <div class="service-icon">🏠</div>
+      <h3 class="service-name">Roof Replacement</h3>
+      <p class="service-desc">Full asphalt shingle replacements done fast and clean, with quality materials built to last decades in Ottawa's climate.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-num">02</span>
+      <div class="service-icon">⚡</div>
+      <h3 class="service-name">Emergency Repairs</h3>
+      <p class="service-desc">Storm damage, missing shingles, leaks — we respond within hours, not days. Your home protected before the next rain hits.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-num">03</span>
+      <div class="service-icon">🔧</div>
+      <h3 class="service-name">Siding & Exterior</h3>
+      <p class="service-desc">Siding panels, fascia, soffit and trim — we handle all exterior work with the same attention to detail as our roofing jobs.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-num">04</span>
+      <div class="service-icon">💧</div>
+      <h3 class="service-name">Eavestrough & Gutters</h3>
+      <p class="service-desc">Proper drainage protects your foundation. We install, repair, and clean gutters to keep water moving away from your home.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-num">05</span>
+      <div class="service-icon">🔍</div>
+      <h3 class="service-name">Roof Inspections</h3>
+      <p class="service-desc">Detailed inspection reports for home purchases, insurance claims, or peace of mind — honest assessments with no upsell pressure.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-num">06</span>
+      <div class="service-icon">🏗️</div>
+      <h3 class="service-name">New Construction</h3>
+      <p class="service-desc">Working with builders and developers, we bring the same professionalism and precision to new builds and major renovations.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / MITCH -->
+<div class="about" id="about">
+  <div class="about-image">
+    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIiB2aWV3Qm94PSIwIDAgODAwIDYwMCI+CiAgPHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9IiMyYTI1MjAiLz4KICA8cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNzk2IiBoZWlnaHQ9IjU5NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjg0YzFlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjEyLDYiLz4KICA8dGV4dCB4PSI0MDAiIHk9IjI4MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI4IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI2I4NGMxZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+8J+TtzwvdGV4dD4KICA8dGV4dCB4PSI0MDAiIHk9IjMzMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjIyIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI2YyZWFkOCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Uk9PRiBQUk9KRUNUPC90ZXh0PgogIDx0ZXh0IHg9IjQwMCIgeT0iMzY1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM4YTgwNzgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlJlcGxhY2Ugd2l0aCB5b3VyIGhpZ2gtcmVzIHBob3RvPC90ZXh0Pgo8L3N2Zz4=" alt="Mitch on the job">
+    <div class="about-image-overlay"></div>
+  </div>
+  <div class="about-content">
+    <p class="section-label">Meet the Boss</p>
+    <h2 class="section-title">Mitch &<br>The Team</h2>
+    <blockquote class="about-quote">
+      "I'm not just fixing roofs — I'm protecting the homes families live in. That's why I don't cut corners."
+    </blockquote>
+    <p class="about-text">Mitch founded The Repair Boss with a simple belief: people deserve a contractor who shows up on time, does the work right, and charges a fair price. No surprises, no runaround.</p>
+    <p class="about-text">Based in Stittsville, we serve communities across Ottawa and the surrounding region. Whether it's a Friday night emergency or a planned full replacement, you'll always deal directly with Mitch — not a call centre.</p>
+    <div class="about-sig">
+      Mitch — The Repair Boss
+      <span>Owner & Lead Contractor · Stittsville, ON</span>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-item">
+    <div class="stat-num">500+</div>
+    <div class="stat-label">Roofs Completed</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">15+</div>
+    <div class="stat-label">Years Experience</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">5★</div>
+    <div class="stat-label">Average Rating</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">24h</div>
+    <div class="stat-label">Emergency Response</div>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<section class="reviews" id="reviews">
+  <div class="reviews-header">
+    <p class="section-label">What Clients Say</p>
+    <h2 class="section-title">Real Words.<br>Real Neighbours.</h2>
+    <div class="stars" style="margin-top: 20px;">★★★★★</div>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"I posted Friday night at 6:45 PM and by 7 PM Mitch had responded. The next morning, he and his colleague arrived promptly as promised. Not only was the piece repaired perfectly, but he also went the extra mile screwing in all the other pieces that could be a potential issue. I offered to pay him even more than he was asking due to the quality of the workmanship."</p>
+      <div class="review-author">Mellisa Fraser</div>
+      <div class="review-date">Stittsville Community · Verified Client</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"I would never have thought the replacement of my roof could be done this quickly! You are hardworking, trustworthy, easy to talk to, caring and have a good heart. Your team are lucky to have you and vice versa. I am forever grateful for your service."</p>
+      <div class="review-author">Marilou Tan</div>
+      <div class="review-date">10 months ago · Verified Client</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"I hired The Repair Boss for one of my projects. Mitch showed up on time, work was done perfectly. I was impressed by his knowledge and how he addressed some of the critical issues of the roofing configuration. I would definitely hire him again and recommend him for any exterior work."</p>
+      <div class="review-author">Didier Sevigny</div>
+      <div class="review-date">7 months ago · Roof Revival & Metal Roofing</div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <p class="gallery-label">Our Work</p>
+  <h2 class="gallery-title">Recent Projects</h2>
+  <div class="gallery-strip">
+    <div class="gallery-item">
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIiB2aWV3Qm94PSIwIDAgODAwIDYwMCI+CiAgPHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9IiMyYTI1MjAiLz4KICA8cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNzk2IiBoZWlnaHQ9IjU5NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjg0YzFlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjEyLDYiLz4KICA8dGV4dCB4PSI0MDAiIHk9IjI4MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI4IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI2I4NGMxZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+8J+TtzwvdGV4dD4KICA8dGV4dCB4PSI0MDAiIHk9IjMzMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjIyIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI2YyZWFkOCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Uk9PRiBQUk9KRUNUPC90ZXh0PgogIDx0ZXh0IHg9IjQwMCIgeT0iMzY1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM4YTgwNzgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlJlcGxhY2Ugd2l0aCB5b3VyIGhpZ2gtcmVzIHBob3RvPC90ZXh0Pgo8L3N2Zz4=" alt="Roof replacement project">
+      <div class="gallery-item-label">Full Replacement — Stittsville</div>
+    </div>
+    <div class="gallery-item">
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIiB2aWV3Qm94PSIwIDAgODAwIDYwMCI+CiAgPHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9IiMyYTI1MjAiLz4KICA8cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNzk2IiBoZWlnaHQ9IjU5NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjg0YzFlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjEyLDYiLz4KICA8dGV4dCB4PSI0MDAiIHk9IjI4MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI4IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI2I4NGMxZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+8J+TtzwvdGV4dD4KICA8dGV4dCB4PSI0MDAiIHk9IjMzMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjIyIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI2YyZWFkOCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Uk9PRiBQUk9KRUNUPC90ZXh0PgogIDx0ZXh0IHg9IjQwMCIgeT0iMzY1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM4YTgwNzgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlJlcGxhY2Ugd2l0aCB5b3VyIGhpZ2gtcmVzIHBob3RvPC90ZXh0Pgo8L3N2Zz4=" alt="Roofing repair">
+      <div class="gallery-item-label">Storm Repair — Kanata</div>
+    </div>
+    <div class="gallery-item">
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIiB2aWV3Qm94PSIwIDAgODAwIDYwMCI+CiAgPHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9IiMyYTI1MjAiLz4KICA8cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNzk2IiBoZWlnaHQ9IjU5NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjg0YzFlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjEyLDYiLz4KICA8dGV4dCB4PSI0MDAiIHk9IjI4MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI4IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI2I4NGMxZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+8J+TtzwvdGV4dD4KICA8dGV4dCB4PSI0MDAiIHk9IjMzMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjIyIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI2YyZWFkOCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Uk9PRiBQUk9KRUNUPC90ZXh0PgogIDx0ZXh0IHg9IjQwMCIgeT0iMzY1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM4YTgwNzgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlJlcGxhY2Ugd2l0aCB5b3VyIGhpZ2gtcmVzIHBob3RvPC90ZXh0Pgo8L3N2Zz4=" alt="New construction roofing">
+      <div class="gallery-item-label">New Build — Barrhaven</div>
+    </div>
+    <div class="gallery-item">
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIiB2aWV3Qm94PSIwIDAgODAwIDYwMCI+CiAgPHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9IiMyYTI1MjAiLz4KICA8cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNzk2IiBoZWlnaHQ9IjU5NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjg0YzFlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjEyLDYiLz4KICA8dGV4dCB4PSI0MDAiIHk9IjI4MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI4IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI2I4NGMxZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+8J+TtzwvdGV4dD4KICA8dGV4dCB4PSI0MDAiIHk9IjMzMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjIyIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI2YyZWFkOCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Uk9PRiBQUk9KRUNUPC90ZXh0PgogIDx0ZXh0IHg9IjQwMCIgeT0iMzY1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM4YTgwNzgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlJlcGxhY2Ugd2l0aCB5b3VyIGhpZ2gtcmVzIHBob3RvPC90ZXh0Pgo8L3N2Zz4=" alt="Siding work">
+      <div class="gallery-item-label">Exterior Siding — Ottawa West</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section class="cta" id="contact">
+  <h2 class="cta-title">Ready to Get Started?</h2>
+  <p class="cta-sub">Call or message Mitch directly. Fast quotes, honest pricing, and work you can trust — that's the Repair Boss promise.</p>
+  <a href="tel:0000000000" class="cta-phone">000-000-0000</a>
+  <p class="cta-note">Available for emergencies · Free Estimates · Serving Ottawa & Area</p>
+  <a href="mailto:mitch@therepairboss.ca" class="btn-white">Send a Message</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">The <span>Repair</span> Boss</div>
+      <p class="footer-tagline">Expert roofing and exterior services in Ottawa, Stittsville, Kanata, Barrhaven, and surrounding areas. Built tough. Done right.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#services">Roof Replacement</a></li>
+        <li><a href="#services">Emergency Repairs</a></li>
+        <li><a href="#services">Siding & Exterior</a></li>
+        <li><a href="#services">Eavestrough</a></li>
+        <li><a href="#services">Inspections</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Service Area</div>
+      <ul class="footer-links">
+        <li><a href="#">Stittsville</a></li>
+        <li><a href="#">Kanata</a></li>
+        <li><a href="#">Barrhaven</a></li>
+        <li><a href="#">Ottawa West</a></li>
+        <li><a href="#">All of Ottawa</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="tel:0000000000">000-000-0000</a></li>
+        <li><a href="mailto:mitch@therepairboss.ca">mitch@therepairboss.ca</a></li>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Google Reviews</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 The Repair Boss. All rights reserved.</span>
+    <span>Stittsville, Ottawa, ON</span>
+  </div>
+</footer>
+
+</body>
+</html>
